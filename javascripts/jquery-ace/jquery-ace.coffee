@@ -9,10 +9,22 @@ window.jQueryAce =
     new klass element, options
 
   defaults:
-    theme: null
-    mode:  null
+    theme:  null
+    lang:   null
+    mode:   null
+    width:  null
+    height: null
 
-  version: '1.0.0'
+  version: '1.0.2'
+
+  require: ->
+    switch true
+      when typeof ace.require is 'function'
+        ace.require.apply null, arguments
+      when typeof window.require is 'function'
+        window.require.apply null, arguments
+      else
+        throw "Can't find 'require' function"
 
 class jQueryAce.BaseEditor
   constructor: (element, options = {}) ->
@@ -24,9 +36,11 @@ class jQueryAce.BaseEditor
     @update()
 
   update: (options) ->
-    @options = $.extend {}, @options, option if options?
+    @options = $.extend {}, @options, options if options?
     @editor.theme @options.theme if @options.theme?
-    @editor.mode  @options.mode  if @options.mode?
+
+    lang = @options.lang || @options.mode
+    @editor.lang lang if lang?
 
   destroy: ->
     @element.data 'ace', null
@@ -66,8 +80,8 @@ class jQueryAce.TextareaEditor extends jQueryAce.BaseEditor
     $('<div></div>').css
       display:  'none'
       position: 'relative'
-      width:    @element.width()
-      height:   @element.height()
+      width:    @options.width  || @element.width()
+      height:   @options.height || @element.height()
 
 class jQueryAce.AceDecorator
   constructor: (@ace) ->
@@ -75,9 +89,12 @@ class jQueryAce.AceDecorator
   theme: (themeName) ->
     @ace.setTheme "ace/theme/#{themeName}"
 
-  mode: (modeName) ->
-    klass = window.require("ace/mode/#{modeName}").Mode
+  lang: (modeName) ->
+    klass = jQueryAce.require("ace/mode/#{modeName}").Mode
     @session().setMode new klass
+
+  mode: (modeName) ->
+    @lang modeName
 
   session: ->
     @ace.getSession()

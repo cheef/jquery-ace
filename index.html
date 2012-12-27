@@ -3,7 +3,7 @@ layout: default
 ---
 
 <h3>What is jQuery-ace?</h3>
-<p>It's a jQuery plugin which allows to embed <a href>ACE Code Editor</a> into any chosen <code>div</code> or <code>textarea</code></p>
+<p>It's a jQuery plugin which allows to embed <a href="http://ace.ajax.org">ACE Code Editor</a> into any chosen <code>div</code> or <code>textarea</code></p>
 <h3>How to install and use</h3>
 <p>
   First you need to include jQuery and Ace libraries. I provide it's bundles in archive in case that you haven't them.
@@ -14,17 +14,48 @@ layout: default
 <script src="vendor/ace-build/src-min-noconflict/theme-twilight.js"></script>
 <script src="vendor/ace-build/src-min-noconflict/mode-ruby.js"></script>
 <script src="jquery-ace.min.js"></script>{% endhighlight %}
-
-  After that apply plugin to the existing textarea:
+  After that apply plugin to the existing <code>textarea</code>:
 {% highlight html %}
 <textarea class="my-code-area" rows="4" style="width: 100%">puts 'foo'</textarea>
 <script>
-  $('.my-code-area').ace({ theme: 'twilight', mode: 'ruby' })
+  $('.my-code-area').ace({ theme: 'twilight', lang: 'ruby' })
 </script>{% endhighlight %}
 
   And ACE Code Edtior will be embeded immediately:
+  <br />
+  <br />
   <textarea class="my-code-area" rows="4" style="width: 100%">puts 'foo'</textarea>
-  <script>$('.my-code-area').ace({ theme: 'twilight' })</script>
+  <script>$('.my-code-area').ace({ theme: 'twilight', lang: 'ruby', width: '100%' })</script>
 </p>
+
+
+<h3>Rails integration</h3>
+<p>
+  If you are using Rails then you could just add <code>jquery-ace-rails</code> gem to <code>Gemfile</code>:
+  {% highlight ruby %}
+  gem 'jquery-ace-rails'
+  {% endhighlight %}
+  And include scripts using sprockets in your <code>application.js</code>:
+  {% highlight javascript %}
+  //= require jquery-ace/vendor/jquery-1.8.3.min
+  //= require jquery-ace/vendor/ace-build/src-min-noconflict/ace
+  //= require jquery-ace/vendor/ace-build/src-min-noconflict/theme-twilight
+  //= require jquery-ace/vendor/ace-build/src-min-noconflict/mode-ruby
+  //= require jquery-ace/jquery-ace.min
+  {% endhighlight %}
+</p>
+
+<h3>Access to ACE Code Editor instance</h3>
+<p>
+  Plugin stores instance of the ACE Code Editor to the elements data. You can access to it through <code>ace</code> data key.
+{% highlight javascript %}
+  // Decorator
+  var decorator = $('.my-code-area').data('ace');
+
+  // ACE Code Editor instance
+  var aceInstance = decorator.ace;
+{% endhighlight %}
+</p>
+
 <h3>Authors and Contributors</h3>
 <p>Ivan Garmatenko (<a href="https://github.com/cheef" class="user-mention">@cheef</a>)</p>
