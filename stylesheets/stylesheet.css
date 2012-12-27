@@ -429,3 +429,9 @@ Small Device Styles
   }
 
 }
+
+.b-version {
+  float: right;
+  line-height: 37px;
+  font-size: 16px;
+}
