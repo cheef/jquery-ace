@@ -9,10 +9,10 @@ layout: default
   First you need to include jQuery and Ace libraries. I provide it's bundles in archive in case that you haven't them.
   Then just include plugin source script:
 {% highlight html %}
-<script src="vendor/jquery-1.8.3.min.js"></script>
-<script src="vendor/ace-build/src-min-noconflict/ace.js"></script>
-<script src="vendor/ace-build/src-min-noconflict/theme-twilight.js"></script>
-<script src="vendor/ace-build/src-min-noconflict/mode-ruby.js"></script>
+<script src="jquery/jquery-1.8.3.min.js"></script>
+<script src="ace/ace.js"></script>
+<script src="ace/theme-twilight.js"></script>
+<script src="ace/mode-ruby.js"></script>
 <script src="jquery-ace.min.js"></script>{% endhighlight %}
   After that apply plugin to the existing <code>textarea</code>:
 {% highlight html %}
@@ -37,11 +37,11 @@ layout: default
   {% endhighlight %}
   And include scripts using sprockets in your <code>application.js</code>:
   {% highlight javascript %}
-  //= require jquery-ace/vendor/jquery-1.8.3.min
-  //= require jquery-ace/vendor/ace-build/src-min-noconflict/ace
-  //= require jquery-ace/vendor/ace-build/src-min-noconflict/theme-twilight
-  //= require jquery-ace/vendor/ace-build/src-min-noconflict/mode-ruby
-  //= require jquery-ace/jquery-ace.min
+  //= require jquery/jquery-1.8.3.min
+  //= require ace/ace
+  //= require ace/theme-twilight
+  //= require ace/mode-ruby
+  //= require jquery-ace.min
   {% endhighlight %}
 </p>
 
