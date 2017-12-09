@@ -144,9 +144,10 @@
     };
 
     AceDecorator.prototype.lang = function(modeName) {
-      var klass;
-      klass = jQueryAce.require("ace/mode/" + modeName).Mode;
-      return this.session().setMode(new klass);
+      //var klass;
+      // klass = jQueryAce.require("ace/mode/" + modeName).Mode;
+      //return this.session().setMode(new klass);
+      return this.session().setMode("ace/mode/"+modeName);
     };
 
     AceDecorator.prototype.mode = function(modeName) {
